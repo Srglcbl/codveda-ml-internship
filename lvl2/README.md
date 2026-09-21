@@ -49,3 +49,53 @@ Interpreting the coefficients (via odds ratios) showed that **Customer service c
 
 ## Tools
 Python, pandas, scikit-learn, matplotlib
+
+# Task 2: Decision Trees — Iris Species Classification
+
+**Level 2 (Intermediate) — Codveda Technologies Machine Learning Internship**
+
+## Description
+Build a decision tree classifier to predict a categorical outcome — iris flower species.
+
+## Dataset
+Iris dataset (150 samples, 4 features, 3 balanced classes). Same dataset as the Task 3 KNN task, for direct model comparison.
+
+**Note:** Decision Trees do not require feature scaling, since splits are based on threshold comparisons rather than distance or gradient calculations.
+
+## Steps
+1. Loaded the dataset, split into training (80%) and testing (20%) sets (stratified)
+2. Trained an unpruned `DecisionTreeClassifier` as a baseline
+3. Visualized the tree structure
+4. Pruned the tree by limiting `max_depth=3` to prevent overfitting
+5. Evaluated using accuracy, classification report, and F1-score
+6. Performed feature importance analysis
+
+## Results
+
+| Model | Depth | Accuracy |
+|---|---|---|
+| Unpruned | 6 levels | 93.33% |
+| **Pruned (max_depth=3)** | 3 levels | **96.67%** |
+
+### Feature Importance (pruned model)
+| Feature | Importance |
+|---|---|
+| petal_length | 57.9% |
+| petal_width | 42.1% |
+| sepal_length | 0% |
+| sepal_width | 0% |
+
+## Conclusion
+
+A Decision Tree classifier was trained on the Iris dataset to classify flowers into three species based on petal and sepal measurements.
+
+The unpruned tree reached a depth of 6 levels and achieved 93.33% accuracy, but showed clear signs of overfitting — some branches split down to a single sample, learning noise rather than general patterns.
+
+After pruning the tree to a maximum depth of 3, accuracy actually **improved to 96.67%**, with only 1 misclassification out of 30 test samples (a virginica sample predicted as versicolor). This demonstrates that a simpler, more generalized tree can outperform an overly complex one — a classic example of the overfitting vs. generalization trade-off.
+
+Feature importance analysis revealed that the tree relies **entirely on petal measurements** (petal_length: 57.9%, petal_width: 42.1%), while sepal_length and sepal_width had zero importance — meaning petal size alone is sufficient to distinguish between the three species.
+
+**Key takeaway:** Unlike KNN, Decision Trees don't require feature scaling since they split data based on threshold comparisons rather than distance calculations. Pruning (limiting tree depth) proved essential for preventing overfitting and improving generalization to unseen data.
+
+## Tools
+Python, scikit-learn, pandas, matplotlib
